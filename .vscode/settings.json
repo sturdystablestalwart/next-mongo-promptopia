@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["satoshi"]
+  "files.associations": { "*.scss": "postcss" },
+  "cSpell.words": ["Promptopia", "satoshi"]
 }

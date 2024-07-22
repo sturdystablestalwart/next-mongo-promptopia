@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
-import { useAmp } from "next/amp";
+import ThemeSwitch from "./ThemeSwitch";
 
 const Nav = () => {
   const { data: session } = useSession();
@@ -22,7 +22,7 @@ const Nav = () => {
       <Link href="/" className="flex gap-2 flex-center">
         <Image
           src="/assets/images/logo.svg"
-          alt=";Promptopia logo"
+          alt="Promptopia logo"
           width={30}
           height={30}
           className="object-contain"
@@ -37,18 +37,25 @@ const Nav = () => {
             <Link href="/create-prompt" className="black_btn">
               Create Prompt
             </Link>
-            <button type="button" onClick={signOut} className="outline_btn">
+            <button
+              type="button"
+              onClick={() => {
+                signOut({ callbackUrl: "/" });
+              }}
+              className="outline_btn"
+            >
               Sign Out
             </button>
             <Link href="/profile">
               <Image
                 src={session?.user.image}
-                width={37}
-                height={37}
-                className="reounded-full"
+                width={40}
+                height={40}
+                className="rounded-full"
                 alt="profile image"
               />
             </Link>
+            <ThemeSwitch />
           </div>
         ) : (
           <>
@@ -63,6 +70,7 @@ const Nav = () => {
                   Sign In
                 </button>
               ))}
+            <ThemeSwitch />
           </>
         )}
       </div>
@@ -73,9 +81,9 @@ const Nav = () => {
           <div className="flex">
             <Image
               src={session?.user.image}
-              width={37}
-              height={37}
-              className="reounded-full"
+              width={40}
+              height={40}
+              className="rounded-full"
               alt="profile image"
               onClick={() => {
                 setToggleDropDown((prev) => !prev);
@@ -101,7 +109,7 @@ const Nav = () => {
                   type="button"
                   onClick={() => {
                     setToggleDropDown(() => false);
-                    signOut();
+                    signOut({ callbackUrl: "/" });
                   }}
                   className="mt-5 w-full black_btn"
                 >
@@ -109,6 +117,8 @@ const Nav = () => {
                 </button>
               </div>
             )}
+
+            <ThemeSwitch />
           </div>
         ) : (
           <>
@@ -123,6 +133,7 @@ const Nav = () => {
                   Sign In
                 </button>
               ))}
+            <ThemeSwitch />
           </>
         )}
       </div>
